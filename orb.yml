@@ -7,12 +7,12 @@ display:
 jobs:
     terratattle:
         description: |
-            This command runs Terratattle.
+            This job runs Terratattle.
         executor: default
         steps:
             - run:
                 command: |
-                    git clone https://git/fsanzica/terratattle .
+                    git clone https://git.rockfin.com/fsanzica/terratattle .
                 name: Clone Terratattle
             - restore_cache:
                 keys:
@@ -43,8 +43,10 @@ commands: {}
 examples:
     terratattle:
         usage:
-            version: "2.1"
+            version: 2.1
             orbs:
-                terratattle: terratattle/terratattle-orb@dev:alpha
-            workflows: null
+                terratattle-orb: terratattle/terratattle-orb@dev:alpha
+            workflows: 
+              use-my-orb:
+                - terratattle-orb/terratattle
 
