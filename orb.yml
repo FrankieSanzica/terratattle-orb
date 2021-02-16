@@ -8,6 +8,7 @@ jobs:
     terratattle:
         description: |
             This command runs Terratattle.
+        executor: default
         steps:
             - run:
                 command: |
