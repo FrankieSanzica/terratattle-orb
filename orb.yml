@@ -45,8 +45,9 @@ examples:
         usage:
             version: 2.1
             orbs:
-                terratattle-orb: terratattle/terratattle-orb@dev:alpha
+              terratattle-orb: terratattle/terratattle-orb@dev:alpha
             workflows: 
               use-my-orb:
-                - terratattle-orb/terratattle
+                jobs:
+                  - terratattle-orb/terratattle
 
