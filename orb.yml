@@ -2,7 +2,7 @@ version: 2.1
 description: |
     Terratattle
 display:
-    home_url: https://www.github.com/FrankieSanzica/terratattle-orb
+    home_url: https://www.github.com/FrankieSanzica/terratattle-orb/
     source_url: https://www.github.com/FrankieSanzica/terratattle-orb/
 jobs:
     terratattle:
@@ -12,7 +12,7 @@ jobs:
         steps:
             - run:
                 command: |
-                    git clone https://git.rockfin.com/fsanzica/terratattle .
+                    git clone https://git.rockfin.com/servicing-sre/terratattle .
                 name: Clone Terratattle
             - restore_cache:
                 keys:
