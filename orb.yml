@@ -4,50 +4,42 @@ description: |
 display:
     home_url: https://www.github.com/FrankieSanzica/terratattle-orb/
     source_url: https://www.github.com/FrankieSanzica/terratattle-orb/
+
 jobs:
     terratattle:
         description: |
             This job runs Terratattle.
+        parameters:
+          github-url:
+            description: GitHub URL
+            type: string
+            default: github.com
         executor: default
         steps:
             - run:
                 command: |
-                    git clone https://git.rockfin.com/servicing-sre/terratattle .
-                name: Clone Terratattle
-            - restore_cache:
-                keys:
-                    - v1-dependencies-{{ checksum "requirements.txt" }}
-                    - v1-dependencies-
-            - run:
-                command: |
+                    git clone https://<<parameters.github-url>>/servicing-sre/terratattle .
                     python3 -m venv venv
                     . venv/bin/activate
                     pip install -r requirements.txt
-                name: Install Dependencies
-            - save_cache:
-                key: v1-dependencies-{{ checksum "requirements.txt" }}
-                paths:
-                    - ./venv
-            - run:
-                command: |
-                    . venv/bin/activate
                     python terratattle.py --circleci
-                name: Run Terratattle!
+
 executors:
     default:
         description: |
             CircleCI Python 3.6.1 image.
         docker:
             - image: circleci/python:3.6.1
+
 commands: {}
+
 examples:
     terratattle:
         usage:
             version: 2.1
             orbs:
-              terratattle-orb: terratattle/terratattle-orb@dev:alpha
+              terratattle-orb: terratattle/terratattle-orb@1.0.0
             workflows: 
               use-my-orb:
                 jobs:
                   - terratattle-orb/terratattle
-
